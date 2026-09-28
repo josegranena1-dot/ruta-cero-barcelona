@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101917" />
+    <title>RUTA CERO — Barcelona</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"
+        }
+      }
+    </script>
+    <script type="module" src="./game.js"></script>
+  </head>
+  <body>
+    <main class="game-shell">
+      <div id="game" class="game-view" aria-label="Escena de juego en 3D">
+        <div class="topline">
+          <div class="brand"><span>HECHO POR JOSÉ · BETA</span></div>
+          <div class="location"><span class="live-dot"></span><span id="district">L'EIXAMPLE · BARCELONA</span><span class="divider">/</span><span id="clock">18:42</span></div>
+          <button id="sound-toggle" class="icon-button" type="button" aria-label="Abrir controles de música" title="Abrir controles de música">♫</button>
+        </div>
+
+        <div id="music-panel" class="music-panel" hidden>
+          <div class="local-music-controls" aria-label="Controles de música local">
+            <input id="music-file" type="file" accept="audio/*,.mp3,.wav,.ogg,.m4a,.aac,.flac" multiple hidden />
+            <button id="music-add" class="music-control" type="button" aria-label="Añadir canciones descargadas" title="Añadir canciones descargadas">＋</button>
+            <button id="music-pause" class="music-control" type="button" aria-label="Elegir canciones para reproducir" title="Pausar o reanudar">Ⅱ</button>
+            <button id="music-next" class="music-control" type="button" aria-label="Siguiente canción" title="Siguiente canción">›</button>
+            <audio id="local-player" preload="none"></audio>
+          </div>
+        </div>
+
+        <section class="mission-panel" aria-live="polite">
+          <div class="eyebrow"><span class="eyebrow-line"></span>ENCARGO 01 <span class="eyebrow-status">EN CURSO</span></div>
+          <h1 id="mission-title">La última<br />entrega</h1>
+          <p id="mission-copy">Cruza Barcelona. Encuentra los puntos de control antes de que se agote el tiempo.</p>
+          <div class="mission-progress"><div class="progress-track"><span id="progress-fill"></span></div><span id="progress-text">0 / 5</span></div>
+          <div class="timer-row"><span>TIEMPO RESTANTE</span><strong id="timer">02:00</strong></div>
+        </section>
+
+        <div class="objective" id="objective"><span class="objective-dot"></span><div><small>PRÓXIMO DESTINO</small><strong id="objective-name">Plaça de Catalunya</strong></div><span id="objective-distance">-- m</span></div>
+
+        <aside class="map-frame" aria-label="Minimapa"><canvas id="minimap" width="180" height="180"></canvas><span class="map-label">RADAR</span></aside>
+
+        <div class="toast" id="toast" role="status"></div>
+        <div class="start-screen" id="start-screen">
+          <div class="start-card">
+            <div class="start-kicker"><span class="live-dot"></span> MODO LIBRE · DISTRITO 01</div>
+            <h2>La ciudad<br />es tuya.</h2>
+            <p>Una noche. Seis entregas.<br />De la ciudad al Mediterráneo.</p>
+            <button id="start-button" type="button" aria-label="Iniciar juego"><span class="sr-only">Iniciar juego</span><b aria-hidden="true">▶</b></button>
+            <div class="start-hint">WASD / FLECHAS <i>·</i> CONDUCIR / ANDAR / NAVEGAR <i>·</i> E <i>·</i> COCHE <i>·</i> B <i>·</i> BARCA</div>
+          </div>
+          <div class="start-coordinate">41° 23′ N&nbsp; 02° 10′ E</div>
+        </div>
+
+        <div class="bottom-left"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span><span class="control-label">CONDUCIR</span><span class="control-spacer"></span><span class="keycap wide">ESPACIO</span><span class="control-label">FRENO</span></div>
+
+        <div class="touch-controls" aria-label="Controles táctiles de conducción">
+          <button class="touch-control" type="button" data-drive-key="arrowleft" aria-label="Girar a la izquierda">←</button>
+          <button class="touch-control" type="button" data-drive-key="arrowup" aria-label="Acelerar">↑</button>
+          <button class="touch-control" type="button" data-drive-key="arrowdown" aria-label="Frenar o ir marcha atrás">↓</button>
+          <button class="touch-control" type="button" data-drive-key="arrowright" aria-label="Girar a la derecha">→</button>
+          <button class="touch-exit" id="touch-exit" type="button" aria-label="Bajar del coche">↔</button>
+        </div>
+
+        <div class="speedometer"><div class="speed-top"><span>VELOCIDAD</span><span id="gear">N</span></div><div class="speed-value"><strong id="speed">000</strong><span>KM/H</span></div><div class="speed-track"><span id="speed-fill"></span></div><div class="vehicle-name" id="vehicle-name">VANTA S9 · COUPÉ BITURBO</div></div>
+
+        <div class="loading" id="loading"><span class="spinner"></span><span>ABRIENDO EL DISTRITO</span></div>
+        <div class="error-message" id="error-message" hidden>No se pudo cargar la escena 3D. Comprueba tu conexión y vuelve a cargar.</div>
+      </div>
+    </main>
+  </body>
+</html>
